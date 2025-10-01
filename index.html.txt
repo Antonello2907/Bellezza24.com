@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bellezza24.com - Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: linear-gradient(135deg, #e60073, #1a1aff);
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px;
+    }
+    .left {
+      max-width: 50%;
+    }
+    .left h1 {
+      font-size: 3em;
+      margin: 0;
+    }
+    .left h1 span {
+      color: #33ccff;
+    }
+    .links {
+      margin-top: 20px;
+      font-size: 1.2em;
+      line-height: 2em;
+    }
+    .links a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+    .right img {
+      max-width: 350px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0,0,0,0.4);
+      margin-top: 40px;
+    }
+    footer a {
+      color: #33ccff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <h2>Antonino Group</h2>
+      <h1>BELLEZZA24<span>.COM</span></h1>
+      <p>Powered by Antonino1.ag</p>
+      <div class="links">
+        🌐 <a href="https://www.bellezza24.com">www.bellezza24.com</a><br>
+        💆 Prenota il tuo trattamento<br>
+        💬 <a href="https://wa.me/">Contattaci su WhatsApp</a><br>
+        🎁 Iscriviti e ricevi lo sconto <b>BEA25</b><br>
+        🛡 Bonus (Affidabilità e fiducia)
+      </div>
+    </div>
+    <div class="right">
+      <img src="immagine4.jpg" alt="Bellezza24.com">
+    </div>
+  </div>
+  <footer>
+    <a href="#">Privacy Policy</a> | 
+    <a href="#">Cookie</a> | 
+    <a href="#">Termini d’Uso</a>
+  </footer>
+</body>
+</html>
