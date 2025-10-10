@@ -1,0 +1,227 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bellezza24.com</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      /* sfondo.png.png */
+      background: url('sfondo.png.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fallback se l'immagine non carica */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff007f, #8000ff);
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 20px;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .text-section {
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .text-section h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: bold;
+      margin-bottom: 15px;
+      line-height: 1.2;
+      word-wrap: break-word;
+    }
+
+    .text-section p {
+      margin: 12px 0;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      line-height: 1.4;
+    }
+
+    .link {
+      color: cyan;
+      text-decoration: none;
+      font-weight: bold;
+      word-break: break-all;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .logo-section img {
+      width: min(180px, 40vw);
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      max-width: 100%;
+    }
+
+    .arrow {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      cursor: pointer;
+      transition: 0.3s;
+      user-select: none;
+      padding: 10px;
+    }
+
+    .arrow:hover {
+      transform: scale(1.2);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 15px;
+      background: rgba(0,0,0,0.2);
+      font-size: 0.9rem;
+      width: 100%;
+    }
+
+    /* Mobile First Approach */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 15px;
+        justify-content: center;
+      }
+      
+      .text-section {
+        order: 2;
+      }
+      
+      .logo-section {
+        order: 1;
+        margin: 20px 0 30px 0;
+      }
+      
+      .text-section h1 {
+        font-size: 2.2rem;
+      }
+      
+      .text-section p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px 10px;
+      }
+      
+      .text-section h1 {
+        font-size: 1.8rem;
+      }
+      
+      .logo-section {
+        gap: 10px;
+      }
+      
+      .arrow {
+        padding: 5px;
+      }
+    }
+
+    /* Prevent horizontal scroll */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="text-section">
+      <h1>BELLEZZA24<span style="color: cyan;">.COM</span></h1>
+      <p>Powered by <strong>Antonino1.ag</strong></p>
+      <p>🌐 <a href="https://antonello2907.github.io/Bellezza24.com/" class="link">www.bellezza24.com</a></p>
+      <p>💇 Prenota il tuo trattamento</p>
+      <p>💬 Contattaci su WhatsApp</p>
+      <p>🎁 Iscriviti e ricevi lo sconto <strong>BEA25</strong></p>
+      <p>💖 Bonus (Affidabilità e fiducia)</p>
+    </div>
+
+    <div class="logo-section">
+      <span class="arrow" onclick="prevPage()">⬅️</span>
+      <!-- CORRETTO: logo.png.png -->
+      <img src="logo.png.png" alt="Logo Bellezza24">
+      <span class="arrow" onclick="nextPage()">➡️</span>
+    </div>
+  </div>
+
+  <footer>
+    Privacy Policy | Cookie | Termini d'Uso
+  </footer>
+
+  <script>
+    let currentPage = 1;
+    const totalPages = 8;
+
+    function nextPage() {
+      currentPage++;
+      if (currentPage > totalPages) currentPage = 1;
+      window.location.href = `pagina${currentPage}.html`;
+    }
+
+    function prevPage() {
+      currentPage--;
+      if (currentPage < 1) currentPage = totalPages;
+      window.location.href = `pagina${currentPage}.html`;
+    }
+
+    // Previene lo zoom su doppio tap su mobile
+    document.addEventListener('touchstart', function(event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(event) {
+      const now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+  </script>
+
+</body>
+</html>
