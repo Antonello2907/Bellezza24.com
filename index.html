@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -95,7 +93,7 @@
 <div class="container">
     <h1>BELLEZZA24.COM</h1>
     
-    <!-- Riga "Powered by" con bottone affiancato (Opzione C) -->
+    <!-- Riga "Powered by" con bottone affiancato -->
     <div class="powered">
         <span>Powered by Antonino1.ag</span>
         <button id="musicButton" class="music-btn">🎵 Ascolta Bellezza</button>
@@ -113,66 +111,43 @@
     </div>
 </div>
 
-<!-- Player YouTube invisibile per "Incanto d'Amore" -->
-<div id="youtube-audio" style="position: absolute; width: 0; height: 0; visibility: hidden;"></div>
+<!-- Audio: "Incanto d'Amore" su JukeHost (play/stop con testo fisso) -->
+<audio id="bellezzaAudio" loop preload="auto">
+    <source src="https://audio.jukehost.co.uk/019e13ba-1851-7027-b6da-389a408fe12c" type="audio/mpeg">
+    Il tuo browser non supporta l'audio.
+</audio>
 
-<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-    var player;
-    var isPlaying = false;
+    var audio = document.getElementById('bellezzaAudio');
     var button = document.getElementById('musicButton');
+    var isPlaying = false;
 
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('youtube-audio', {
-            height: '0',
-            width: '0',
-            videoId: '6DMbKVfu_bQ',
-            playerVars: {
-                'controls': 0,
-                'rel': 0,
-                'showinfo': 0,
-                'modestbranding': 1,
-                'loop': 1,
-                'playlist': '6DMbKVfu_bQ'
-            },
-            events: {
-                'onStateChange': onPlayerStateChange
+    if (audio) {
+        audio.load();
+    }
+
+    if (button) {
+        button.addEventListener('click', function() {
+            if (!audio) return;
+            
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                // Il testo del bottone NON cambia (rimane "🎵 Ascolta Bellezza")
+            } else {
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                        isPlaying = true;
+                        // Il testo del bottone NON cambia
+                    }).catch(function(error) {
+                        console.error('Errore audio:', error);
+                        button.textContent = '⚠️ Errore';
+                        button.style.background = '#ef4444';
+                    });
+                }
             }
         });
-    }
-
-    function onPlayerStateChange(event) {
-        // Se il video finisce, lo riavviamo (loop continuo)
-        if (event.data == YT.PlayerState.ENDED) {
-            player.playVideo();
-        }
-        // Aggiorniamo stato del bottone
-        if (event.data == YT.PlayerState.PLAYING) {
-            isPlaying = true;
-            button.textContent = '🎵 Bellezza in riproduzione';
-            button.style.opacity = '0.6';
-            button.disabled = true;  // impedisce click multipli
-        } else if (event.data == YT.PlayerState.PAUSED) {
-            isPlaying = false;
-            button.textContent = '🎵 Ascolta Bellezza';
-            button.style.opacity = '1';
-            button.disabled = false;
-        }
-    }
-
-    // Alterna play/pausa
-    function toggleMusic() {
-        if (!player) return;
-        if (isPlaying) {
-            player.pauseVideo();
-        } else {
-            player.playVideo();
-        }
-    }
-
-    // Assegna evento al bottone
-    if (button) {
-        button.addEventListener('click', toggleMusic);
     }
 </script>
 </body>
