@@ -1,154 +1,228 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bellezza24.com</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: #fdfaf6;
-            color: #2c3e2f;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        h1 {
-            font-size: 3.5rem;
-            color: #b87333;
-            margin-bottom: 0.5rem;
-        }
-        .powered {
-            display: flex;
-            align-items: baseline;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-            font-size: 1rem;
-            color: #7f6b5e;
-        }
-        .powered span {
-            font-size: 0.9rem;
-        }
-        /* STILE BOTTONE MUSICA (identico agli altri siti) */
-        .music-btn {
-            background: #38a169;
-            border: none;
-            color: white;
-            font-size: 0.9rem;
-            padding: 6px 16px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.1s;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-        .music-btn:active {
-            transform: scale(0.97);
-        }
-        .buttons {
-            margin: 2rem 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.2rem;
-        }
-        .btn {
-            display: inline-block;
-            background: #b87333;
-            color: white;
-            text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-weight: bold;
-            width: 250px;
-            transition: 0.2s;
-        }
-        .btn:hover {
-            background: #9b5e2a;
-            transform: scale(1.02);
-        }
-        .footer-note {
-            margin-top: 3rem;
-            font-size: 0.8rem;
-            color: #aa9f8c;
-            border-top: 1px solid #e2d9cd;
-            padding-top: 1.5rem;
-        }
-        @media (max-width: 550px) {
-            h1 { font-size: 2.2rem; }
-            .btn { width: 220px; }
-            .powered { gap: 8px; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Bellezza24.com</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: white;
+      /* sfondo.png.png */
+      background: url('sfondo.png.png') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fallback se l'immagine non carica */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff007f, #8000ff);
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px 20px;
+      flex-wrap: wrap;
+      flex-grow: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .text-section {
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .text-section h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: bold;
+      margin-bottom: 15px;
+      line-height: 1.2;
+      word-wrap: break-word;
+    }
+
+    .text-section p {
+      margin: 12px 0;
+      font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+      line-height: 1.4;
+    }
+
+    .link {
+      color: cyan;
+      text-decoration: none;
+      font-weight: bold;
+      word-break: break-all;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .logo-section img {
+      width: min(180px, 40vw);
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      max-width: 100%;
+    }
+
+    .arrow {
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      cursor: pointer;
+      transition: 0.3s;
+      user-select: none;
+      padding: 10px;
+    }
+
+    .arrow:hover {
+      transform: scale(1.2);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: auto;
+      padding: 15px;
+      background: rgba(0,0,0,0.2);
+      font-size: 0.9rem;
+      width: 100%;
+    }
+
+    /* Mobile First Approach */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px 15px;
+        justify-content: center;
+      }
+      
+      .text-section {
+        order: 2;
+      }
+      
+      .logo-section {
+        order: 1;
+        margin: 20px 0 30px 0;
+      }
+      
+      .text-section h1 {
+        font-size: 2.2rem;
+      }
+      
+      .text-section p {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 15px 10px;
+      }
+      
+      .text-section h1 {
+        font-size: 1.8rem;
+      }
+      
+      .logo-section {
+        gap: 10px;
+      }
+      
+      .arrow {
+        padding: 5px;
+      }
+    }
+
+    /* Prevent horizontal scroll */
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>BELLEZZA24.COM</h1>
-    
-    <!-- Riga "Powered by" con bottone affiancato -->
-    <div class="powered">
-        <span>Powered by Antonino1.ag</span>
-        <button id="musicButton" class="music-btn">🎵 Ascolta Bellezza</button>
+  <div class="container">
+    <div class="text-section">
+      <h1>BELLEZZA24<span style="color: cyan;">.COM</span></h1>
+      <p>Powered by <strong>Antonino1.ag</strong></p>
+      <p>🌐 <a href="https://antonello2907.github.io/Bellezza24.com/" class="link">www.bellezza24.com</a></p>
+      <p>💇 Prenota il tuo trattamento</p>
+      <p>💬 Contattaci su WhatsApp</p>
+      <p>🎁 Iscriviti e ricevi lo sconto <strong>BEA25</strong></p>
+      <p>💖 Bonus (Affidabilità e fiducia)</p>
     </div>
 
-    <div class="buttons">
-        <a href="#" class="btn">💇 Prenota il tuo trattamento</a>
-        <a href="#" class="btn">💬 Contattaci su WhatsApp</a>
-        <a href="#" class="btn">🎁 Iscriviti e ricevi lo sconto BEA25</a>
-        <a href="#" class="btn">💖 Bonus (Affidabilità e fiducia)</a>
-    </div>
-
-    <div class="footer-note">
-        ✦ Benessere, estetica e cura di sé ✦
-    </div>
+    <div class="logo-section">
+  <a href="https://antonello2907.github.io/Bellezza24.com/" class="arrow">⬅️</a>
+  <img src="logo.png.png" alt="Logo Bellezza24">
+  <a href="https://antonello2907.github.io/Bellezza24.com-Privacy-Policy/" class="arrow">➡️</a>
 </div>
+  </div>
 
-<!-- Audio: "Incanto d'Amore" su JukeHost (play/stop con testo fisso) -->
-<audio id="bellezzaAudio" loop preload="auto">
-    <source src="https://audio.jukehost.co.uk/019e13ba-1851-7027-b6da-389a408fe12c" type="audio/mpeg">
-    Il tuo browser non supporta l'audio.
-</audio>
+  <footer>
+    Privacy Policy | Cookie | Termini d'Uso
+  </footer>
 
-<script>
-    var audio = document.getElementById('bellezzaAudio');
-    var button = document.getElementById('musicButton');
-    var isPlaying = false;
+  <script>
+    let currentPage = 1;
+    const totalPages = 8;
 
-    if (audio) {
-        audio.load();
+    function nextPage() {
+      currentPage++;
+      if (currentPage > totalPages) currentPage = 1;
+      window.location.href = `pagina${currentPage}.html`;
     }
 
-    if (button) {
-        button.addEventListener('click', function() {
-            if (!audio) return;
-            
-            if (isPlaying) {
-                audio.pause();
-                isPlaying = false;
-                // Il testo del bottone NON cambia (rimane "🎵 Ascolta Bellezza")
-            } else {
-                var playPromise = audio.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(function() {
-                        isPlaying = true;
-                        // Il testo del bottone NON cambia
-                    }).catch(function(error) {
-                        console.error('Errore audio:', error);
-                        button.textContent = '⚠️ Errore';
-                        button.style.background = '#ef4444';
-                    });
-                }
-            }
-        });
+    function prevPage() {
+      currentPage--;
+      if (currentPage < 1) currentPage = totalPages;
+      window.location.href = `pagina${currentPage}.html`;
     }
-</script>
+
+    // Previene lo zoom su doppio tap su mobile
+    document.addEventListener('touchstart', function(event) {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    }, { passive: false });
+
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function(event) {
+      const now = (new Date()).getTime();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, false);
+  </script>
+
 </body>
+
 </html>
+
